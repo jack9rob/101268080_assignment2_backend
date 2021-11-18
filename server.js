@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const employeeRouter = require('./routes/EmployeeRoutes.js');
+var cors = require('cors')
 
 const app = express();
 app.use(express.json()); // Make sure it comes back as json
@@ -10,6 +11,8 @@ mongoose.connect('mongodb+srv://jack:txFTSmfRQMBx3aHl@comp3123.eyf58.mongodb.net
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+app.use(cors())
 
 app.use(employeeRouter);
 

@@ -10,14 +10,16 @@ app.get('/api/v1/employees', async (req, res) => {
     try {
       res.send({employees});
     } catch (err) {
+      console.log(err)
       res.status(500).send(err);
     }
 });
 
 // create new employee
 app.post('/api/v1/employees', async (req, res) => {
-    const employee = new employeeModel(req.body);
-  
+    console.log(req.body.data)
+    const employee = new employeeModel(req.body.data);
+
     try {
       await employee.save();
       res.send(employee);
@@ -30,6 +32,7 @@ app.post('/api/v1/employees', async (req, res) => {
 app.get('/api/v1/employees/:id', async (req, res) => {
     try {
         const employee = await employeeModel.findById(req.params.id)
+        console.log(employee)
         res.send(employee)
     } catch(err) {
         res.status(500).send(err)
