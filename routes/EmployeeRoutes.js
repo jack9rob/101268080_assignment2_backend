@@ -18,7 +18,7 @@ app.get('/api/v1/employees', async (req, res) => {
 // create new employee
 app.post('/api/v1/employees', async (req, res) => {
     console.log(req.body.data)
-    const employee = new employeeModel(req.body.data);
+    const employee = new employeeModel(req.body);
 
     try {
       await employee.save();
@@ -42,9 +42,9 @@ app.get('/api/v1/employees/:id', async (req, res) => {
 // update employee by id
 app.put('/api/v1/employees/:id', async (req, res) => {
     try {
-      const employee = await employeeModel.findByIdAndUpdate(req.params.id, req.body)
-      await employeeModel.save()
-      res.send(employee)
+      await employeeModel.findByIdAndUpdate(req.params.id, req.body)
+      // employeeModel.save()
+      res.send("Complete")
     } catch (err) {
       res.status(500).send(err)
     }
